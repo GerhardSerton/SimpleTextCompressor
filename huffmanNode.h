@@ -2,15 +2,31 @@
 #define HUFFMANNODE_H
 
 #include <string>
+#include <memory>
 
 class HuffmanNode
 {
 public:
-  char letter;
+  char letter = '\0';
   int frequency;
+  std::shared_ptr<HuffmanNode> left;
+  std::shared_ptr<HuffmanNode> right;
+  bool leaf;
 
   HuffmanNode();
-  HuffmanNode(char letter, int frequency);
+  HuffmanNode(char l, int f);
+  HuffmanNode(int f, std::shared_ptr<HuffmanNode> l, std::shared_ptr<HuffmanNode> r);
+  HuffmanNode(const HuffmanNode & rhs);
+  HuffmanNode(HuffmanNode && rhs);
   ~HuffmanNode();
-  bool compare(const HuffmanNode & a, const HuffmanNode & b);
-}
+
+  HuffmanNode & operator = (const HuffmanNode & rhs)
+  {
+    HuffmanNode hello;
+    HuffmanNode & here = hello;
+    return here;
+  };
+
+};
+
+#endif

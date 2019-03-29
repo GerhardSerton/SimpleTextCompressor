@@ -20,4 +20,10 @@ clean:
 	@rm -f *.o
 
 debug: huffmanNode.o huffmanTree.o driver.o
-	$(CC) -g driver.cpp huffmanTree.cpp huffmanNode.cpp
+	$(CC) -g driver.cpp huffmanTree.cpp huffmanNode.cpp -o debug
+
+unit: huffmanNode.o huffmanTree.o catchTest.o
+	$(CC) -o unitTest catchTest.o huffmanTree.o huffmanNode.o
+
+catchTest.o: catchTest.cpp
+	$(CC) -c -o catchTest.o catchTest.cpp
