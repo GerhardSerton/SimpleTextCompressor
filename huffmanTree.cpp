@@ -4,6 +4,7 @@ HuffmanTree::HuffmanTree()
 {}
 void HuffmanTree::readFile(std::string fileinname)
 {
+  inputname = fileinname;
   std::ifstream inputFile (fileinname);
   if (inputFile.is_open())
   {
@@ -28,10 +29,12 @@ void HuffmanTree::readFile(std::string fileinname)
   {
     std::cout << "File not found";
   }
+  inputFile.close();
 
 }
 void HuffmanTree::createTree()
 {
+  bool first = true;
   while (queue.size() > 1)
   {
     auto leftPtr = std::make_shared<HuffmanNode>(queue.top());
@@ -41,20 +44,50 @@ void HuffmanTree::createTree()
     int f = HuffmanNode(*leftPtr).frequency + HuffmanNode(*rightPtr).frequency;
     HuffmanNode z (f, leftPtr, rightPtr);
     queue.push(z);
-    std::cout << queue.top().frequency << "queue\n";
+    //std::cout << queue.top().frequency << "queue\n";
   }
 }
 void HuffmanTree::writeFile(std::string fileoutname)
-{}
+{
+  std::unordered_map<char, std::string> qm = preComputeCodes();
+  std::ifstream inputFile (inputname);
+  std::ofstream outputFile (fileoutname);
+  if (inputFile.is_open())
+  {
+    char currentChar;
+    while ((inputFile.get(currentChar), inputFile.eof()) == false)
+    {
+      outputFile << qm[currentChar];
+    }
+
+  }
+  else
+  {
+    std::cout << "File not found";
+  }
+  inputFile.close();
+  outputFile.close();
+
+}
 void HuffmanTree::writeTreeFile(std::string fileoutname)
-{}
+{
+
+}
 void HuffmanTree::insertIntoQueue(HuffmanNode h)
 {}
 void HuffmanTree::readIntoMap(char c)
 {
   charmap[c] = charmap[c] + 1;
 }
-
+std::unordered_map<char, std::string> HuffmanTree::preComputeCodes()
+{
+  std::unordered_map<char, std::string> quickmap;
+  for (const auto  & n: charmap)
+  {
+    //need to recurse
+  }
+  return quickmap;
+}
 int HuffmanTree::mapAt(char c)
 {
   return charmap[c];

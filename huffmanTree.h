@@ -13,6 +13,7 @@ class HuffmanTree
 private:
   std::priority_queue<HuffmanNode, std::vector<HuffmanNode>> queue;
   std::unordered_map<char, int> charmap;
+  std::string inputname;
 
 public:
   HuffmanTree();
@@ -24,6 +25,7 @@ public:
   void insertIntoQueue(HuffmanNode h);
   void readIntoMap(char c);
 
+  std::unordered_map<char, std::string> preComputeCodes();
   int mapAt(char c);
   std::shared_ptr<HuffmanNode> createHuffmanNode(char c);
 };

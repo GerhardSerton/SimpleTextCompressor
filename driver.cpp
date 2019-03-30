@@ -11,5 +11,6 @@ int main (int argc, char*argv[])
   HuffmanTree tree;
   tree.readFile(argv[1]);
   tree.createTree();
+  tree.writeFile(argv[2]);
 
 }
