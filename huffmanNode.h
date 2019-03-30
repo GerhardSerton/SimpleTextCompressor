@@ -11,7 +11,7 @@ public:
   int frequency;
   std::shared_ptr<HuffmanNode> left;
   std::shared_ptr<HuffmanNode> right;
-  bool leaf;
+  bool leaf = false;
 
   HuffmanNode();
   HuffmanNode(char l, int f);
@@ -22,11 +22,11 @@ public:
 
   bool operator > (const HuffmanNode & a) const
   {
-    return frequency > a.frequency;
+    return frequency < a.frequency;
   }
   bool operator < (const HuffmanNode & a) const
   {
-    return frequency < a.frequency;
+    return frequency > a.frequency;
   }
   HuffmanNode & operator = (const HuffmanNode & rhs)
   {
