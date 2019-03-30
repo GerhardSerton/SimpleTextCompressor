@@ -20,11 +20,36 @@ public:
   HuffmanNode(HuffmanNode && rhs);
   ~HuffmanNode();
 
+  bool operator > (const HuffmanNode & a) const
+  {
+    return frequency > a.frequency;
+  }
+  bool operator < (const HuffmanNode & a) const
+  {
+    return frequency < a.frequency;
+  }
   HuffmanNode & operator = (const HuffmanNode & rhs)
   {
-    HuffmanNode hello;
-    HuffmanNode & here = hello;
-    return here;
+    letter = rhs.letter;
+    frequency = rhs.frequency;
+    leaf = rhs.leaf;
+    left = rhs.left;
+    right = rhs.right;
+    return * this;
+  };
+  HuffmanNode & operator = (HuffmanNode && rhs)
+  {
+    letter = rhs.letter;
+    frequency = rhs.frequency;
+    leaf = rhs.leaf;
+    left = rhs.left;
+    right = rhs.right;
+
+    rhs.letter = '\0';
+    rhs.frequency = 0;
+    rhs.leaf = false;
+
+    return * this;
   };
 
 };

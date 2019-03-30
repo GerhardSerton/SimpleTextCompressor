@@ -8,19 +8,10 @@
 #include <unordered_map>
 #include "huffmanNode.h"
 
-class Compare
-{
-public:
-    bool operator() (HuffmanNode, HuffmanNode)
-    {
-        return true;
-    }
-};
-
 class HuffmanTree
 {
 private:
-  std::priority_queue<HuffmanNode, std::vector<HuffmanNode>, Compare> queue;
+  std::priority_queue<HuffmanNode, std::vector<HuffmanNode>> queue;
   std::unordered_map<char, int> charmap;
 
 public:
@@ -29,6 +20,7 @@ public:
   void readFile(std::string fileinname);
   void createTree();
   void writeFile(std::string fileoutname);
+  void writeTreeFile(std::string fileoutname);
   void insertIntoQueue(HuffmanNode h);
   void readIntoMap(char c);
 

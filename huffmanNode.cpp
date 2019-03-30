@@ -13,10 +13,19 @@ HuffmanNode::HuffmanNode(int f, std::shared_ptr<HuffmanNode> l, std::shared_ptr<
   left = l;
   right = r;
 }
-HuffmanNode::HuffmanNode(const HuffmanNode & rhs)
-{}
-HuffmanNode::HuffmanNode(HuffmanNode && rhs)
-{}
+HuffmanNode::HuffmanNode(const HuffmanNode & rhs): letter(rhs.letter), frequency(rhs.frequency),leaf(rhs.leaf)
+{
+  left = rhs.left;
+  right = rhs.right;
+}
+HuffmanNode::HuffmanNode(HuffmanNode && rhs): letter(rhs.letter), frequency(rhs.frequency),leaf(rhs.leaf)
+{
+  left = rhs.left;
+  right = rhs.right;
+
+  rhs.letter = '\0';
+  rhs.frequency = 0;
+  rhs.leaf = false;
+}
 HuffmanNode::~HuffmanNode()
 {}
-//HuffmanNode & operator = (const HuffmanNode & rhs)

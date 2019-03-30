@@ -13,7 +13,13 @@ void HuffmanTree::readFile(std::string fileinname)
       readIntoMap(currentChar);
       //std::cout << currentChar <<": " << charmap[currentChar] << "\n";
     }
-    inputFile.close();
+
+    for (const auto  & n: charmap)
+    {
+      //std::cout << n.first << " " << n.second << "\n";
+      HuffmanNode x (n.first, n.second);
+      queue.push(x);
+    }
   }
   else
   {
@@ -24,6 +30,8 @@ void HuffmanTree::readFile(std::string fileinname)
 void HuffmanTree::createTree()
 {}
 void HuffmanTree::writeFile(std::string fileoutname)
+{}
+void HuffmanTree::writeTreeFile(std::string fileoutname)
 {}
 void HuffmanTree::insertIntoQueue(HuffmanNode h)
 {}
