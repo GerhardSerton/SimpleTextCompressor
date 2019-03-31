@@ -13,9 +13,11 @@ class HuffmanTree
 private:
   std::priority_queue<HuffmanNode, std::vector<HuffmanNode>> queue;
   std::unordered_map<char, int> charmap;
+  std::unordered_map<char, std::string> quickmap;
   std::string inputname;
 
 public:
+
   HuffmanTree();
 
   void readFile(std::string fileinname);
@@ -24,9 +26,11 @@ public:
   void writeTreeFile(std::string fileoutname);
   void insertIntoQueue(HuffmanNode h);
   void readIntoMap(char c);
+  void traverseTree(std::string code, HuffmanNode h);
 
-  std::unordered_map<char, std::string> preComputeCodes();
   int mapAt(char c);
+  std::string codeAt(char c);
   std::shared_ptr<HuffmanNode> createHuffmanNode(char c);
+
 };
 #endif

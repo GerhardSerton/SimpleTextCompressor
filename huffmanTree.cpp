@@ -34,7 +34,6 @@ void HuffmanTree::readFile(std::string fileinname)
 }
 void HuffmanTree::createTree()
 {
-  bool first = true;
   while (queue.size() > 1)
   {
     auto leftPtr = std::make_shared<HuffmanNode>(queue.top());
@@ -49,7 +48,7 @@ void HuffmanTree::createTree()
 }
 void HuffmanTree::writeFile(std::string fileoutname)
 {
-  std::unordered_map<char, std::string> qm = preComputeCodes();
+  traverseTree("", queue.top());
   std::ifstream inputFile (inputname);
   std::ofstream outputFile (fileoutname);
   if (inputFile.is_open())
@@ -57,7 +56,8 @@ void HuffmanTree::writeFile(std::string fileoutname)
     char currentChar;
     while ((inputFile.get(currentChar), inputFile.eof()) == false)
     {
-      outputFile << qm[currentChar];
+      outputFile << quickmap[currentChar];
+
     }
 
   }
@@ -79,18 +79,28 @@ void HuffmanTree::readIntoMap(char c)
 {
   charmap[c] = charmap[c] + 1;
 }
-std::unordered_map<char, std::string> HuffmanTree::preComputeCodes()
+void HuffmanTree::traverseTree(std::string code, HuffmanNode h)
 {
-  std::unordered_map<char, std::string> quickmap;
-  for (const auto  & n: charmap)
+  //std::cout << "Frequency: " << h.frequency << " Leaf: " << h.leaf << "\n";
+  if (h.leaf)
   {
-    //need to recurse
+    quickmap[h.letter] = code;
+    //std::cout << "Character: " << h.letter << " Code: " << quickmap[h.letter] << "\n";
   }
-  return quickmap;
+  else
+  {
+    traverseTree(code + "0", HuffmanNode(*h.left));
+    traverseTree(code + "1", HuffmanNode(*h.right));
+  }
 }
 int HuffmanTree::mapAt(char c)
 {
   return charmap[c];
+}
+
+std::string HuffmanTree::codeAt(char c)
+{
+  return quickmap[c];
 }
 
 std::shared_ptr<HuffmanNode> HuffmanTree::createHuffmanNode(char c)

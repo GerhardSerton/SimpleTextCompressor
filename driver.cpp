@@ -6,8 +6,7 @@
 using namespace std;
 int main (int argc, char*argv[])
 {
-  string inputfile = argv[1];
-  string outputfile = argv[2];
+  cout << "File accessed: " << argv[1] << " Output file: " << argv[2] << "\n";
   HuffmanTree tree;
   tree.readFile(argv[1]);
   tree.createTree();
