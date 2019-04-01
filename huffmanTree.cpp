@@ -71,6 +71,13 @@ void HuffmanTree::writeFile(std::string fileoutname)
 }
 void HuffmanTree::writeTreeFile(std::string fileoutname)
 {
+  std::ofstream treeFile (fileoutname + ".hdr");
+  treeFile << quickmap.size() << "\n";
+  for (auto & it: quickmap)
+  {
+    treeFile << it.first << " " << it.second << "\n";
+  }
+  treeFile.close();
 
 }
 void HuffmanTree::insertIntoQueue(HuffmanNode h)
@@ -78,6 +85,7 @@ void HuffmanTree::insertIntoQueue(HuffmanNode h)
 void HuffmanTree::readIntoMap(char c)
 {
   charmap[c] = charmap[c] + 1;
+
 }
 void HuffmanTree::traverseTree(std::string code, HuffmanNode h)
 {
@@ -85,6 +93,7 @@ void HuffmanTree::traverseTree(std::string code, HuffmanNode h)
   if (h.leaf)
   {
     quickmap[h.letter] = code;
+
     //std::cout << "Character: " << h.letter << " Code: " << quickmap[h.letter] << "\n";
   }
   else
@@ -103,6 +112,10 @@ std::string HuffmanTree::codeAt(char c)
   return quickmap[c];
 }
 
+HuffmanNode HuffmanTree::getTree()
+{
+  return queue.top();
+}
 std::shared_ptr<HuffmanNode> HuffmanTree::createHuffmanNode(char c)
 {
   std::shared_ptr<HuffmanNode> newNode = std::make_shared<HuffmanNode>(c, charmap[c]);

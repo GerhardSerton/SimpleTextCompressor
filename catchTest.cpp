@@ -46,3 +46,40 @@ TEST_CASE("File Output Check")
   std::getline(fileIn, line);
   REQUIRE(line == "011101110010010110111011100100011010");
 }
+
+TEST_CASE("Header File Output Check")
+{
+  HuffmanTree tree;
+  tree.readFile("test.txt");
+  tree.createTree();
+  tree.writeFile("unitTestResults.txt");
+  tree.writeTreeFile("unitTestResults.txt");
+  std::ifstream fileIn("unitTestResults.txt.hdr");
+  std::string line;
+  std::getline(fileIn, line);
+  REQUIRE(line == "7");
+  std::string s;
+  bool pass = true;
+  while ((std::getline(fileIn, s), fileIn.eof()) == false)
+  {
+    if (s == "c 111")
+    {}
+    else if (s == "a 01")
+    {}
+    else if (s == "d 00")
+    {}
+    else if (s == "e 100")
+    {}
+    else if (s == "")
+    {}
+    else if (s == " 1010")
+    {}
+    else if (s == "f 1011")
+    {}
+    else if (s == "b 110")
+    {}
+    else
+    {pass = false;}
+  }
+  REQUIRE(pass);
+}

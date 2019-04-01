@@ -30,6 +30,7 @@ public:
 
   int mapAt(char c);
   std::string codeAt(char c);
+  HuffmanNode getTree();
   std::shared_ptr<HuffmanNode> createHuffmanNode(char c);
 
 };
