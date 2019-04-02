@@ -44,6 +44,8 @@ public:
 
     rhs.root = nullptr;
     rhs.inputname = "";
+    rhs.charmap.clear();
+    rhs.quickmap.clear();
 
     return * this;
   };

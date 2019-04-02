@@ -20,6 +20,8 @@ HuffmanTree::HuffmanTree(HuffmanTree && rhs)
 
   rhs.root = nullptr;
   rhs.inputname = "";
+  rhs.charmap.clear();
+  rhs.quickmap.clear();
 }
 HuffmanTree::~HuffmanTree()
 {
