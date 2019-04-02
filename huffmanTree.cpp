@@ -2,6 +2,29 @@
 
 HuffmanTree::HuffmanTree()
 {}
+HuffmanTree::HuffmanTree(const HuffmanTree & rhs)
+{
+  queue = rhs.queue;
+  charmap = rhs.charmap;
+  quickmap = rhs.quickmap;
+  inputname = rhs.inputname;
+  root = rhs.root;
+}
+HuffmanTree::HuffmanTree(HuffmanTree && rhs)
+{
+  queue = rhs.queue;
+  charmap = rhs.charmap;
+  quickmap = rhs.quickmap;
+  inputname = rhs.inputname;
+  root = rhs.root;
+
+  rhs.root = nullptr;
+  rhs.inputname = "";
+}
+HuffmanTree::~HuffmanTree()
+{
+  root = nullptr;
+}
 void HuffmanTree::readFile(std::string fileinname)
 {
   inputname = fileinname;
@@ -45,10 +68,13 @@ void HuffmanTree::createTree()
     queue.push(z);
     //std::cout << queue.top().frequency << "queue\n";
   }
+  root = std::make_shared<HuffmanNode>(queue.top());
+  queue.pop();
 }
 void HuffmanTree::writeFile(std::string fileoutname)
 {
-  traverseTree("", queue.top());
+  //traverseTree("", queue.top());
+  traverseTree("", *root);
   std::ifstream inputFile (inputname);
   std::ofstream outputFile (fileoutname);
   if (inputFile.is_open())

@@ -29,6 +29,8 @@ HuffmanNode::HuffmanNode(HuffmanNode && rhs): letter(rhs.letter), frequency(rhs.
   rhs.letter = '\0';
   rhs.frequency = 0;
   rhs.leaf = false;
+  rhs.left = nullptr;
+  rhs.right = nullptr;
 
 }
 HuffmanNode::~HuffmanNode()

@@ -15,10 +15,38 @@ private:
   std::unordered_map<char, int> charmap;
   std::unordered_map<char, std::string> quickmap;
   std::string inputname;
+  std::shared_ptr<HuffmanNode> root;
 
 public:
 
   HuffmanTree();
+  HuffmanTree(const HuffmanTree & rhs);
+  HuffmanTree(HuffmanTree && rhs);
+  ~HuffmanTree();
+
+  HuffmanTree & operator = (const HuffmanTree & rhs)
+  {
+    queue = rhs.queue;
+    charmap = rhs.charmap;
+    quickmap = rhs.quickmap;
+    inputname = rhs.inputname;
+    root = rhs.root;
+
+    return * this;
+  };
+  HuffmanTree & operator = (HuffmanTree && rhs)
+  {
+    queue = rhs.queue;
+    charmap = rhs.charmap;
+    quickmap = rhs.quickmap;
+    inputname = rhs.inputname;
+    root = rhs.root;
+
+    rhs.root = nullptr;
+    rhs.inputname = "";
+
+    return * this;
+  };
 
   void readFile(std::string fileinname);
   void createTree();

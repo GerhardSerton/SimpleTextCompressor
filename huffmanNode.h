@@ -48,6 +48,8 @@ public:
     rhs.letter = '\0';
     rhs.frequency = 0;
     rhs.leaf = false;
+    rhs.left = nullptr;
+    rhs.right = nullptr;
 
     return * this;
   };
